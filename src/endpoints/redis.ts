@@ -22,7 +22,7 @@ export async function pipeline(req: Request, res: Response) {
         const [name, ...args] = command;
 
         client.sendCommand([name?.toUpperCase(), ...args]);
-      })
+      }),
     );
 
     return res.json(redisRes.map((result) => ({ result })));
@@ -44,7 +44,7 @@ export async function transaction(req: Request, res: Response) {
 
     for (const command of commands) {
       // @ts-ignore-next-line
-      redisCall = redisCall[command[0]!.toUpperCase()](...command.slice(1));
+      redisCall = redisCall[command[0]?.toUpperCase()](...command.slice(1));
     }
 
     const redisRes = await redisCall.exec();
