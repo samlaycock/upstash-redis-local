@@ -5,20 +5,17 @@ services:
   planetscale:
     build:
       context: .
-    container_name: planetscale_local
-    hostname: planetscale-local
+    container_name: upstash_redis_local
+    hostname: upstash-redis-local
+    depends_on:
+      - redis
     ports:
       - 3000:8080
     environment:
-      - MYSQL_URL=mysql://planetscale:planetscale@mysql:3306/planetscale
       - PORT=8080
-  # MYSQL
-  mysql:
-    image: mysql:8.0.32
-    container_name: mysql
-    hostname: mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=planetscale
-      - MYSQL_DATABASE=planetscale
-      - MYSQL_USER=planetscale
-      - MYSQL_PASSWORD=planetscale
+      - REDIS_URL=redis://redis:6379
+  # Redis
+  redis:
+    image: redis:6.2.6
+    hostname: redis
+    command: redis-server --save 60 1 --loglevel warning
