@@ -68,7 +68,9 @@ export async function command(req: Request, res: Response) {
   try {
     await connection;
 
-    const redisRes = await client.sendCommand(args);
+    const redisRes = await client.sendCommand(
+      args.map((arg) => arg.toString()),
+    );
 
     return res.json({ result: redisRes });
   } catch (_) {
