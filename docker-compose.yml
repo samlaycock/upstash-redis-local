@@ -1,8 +1,8 @@
 version: "3.4"
 
 services:
-  # Planetscale local
-  planetscale:
+  # Redis local
+  upstash_redis:
     build:
       context: .
     container_name: upstash_redis_local
