@@ -18,5 +18,5 @@ app.post("*", json(), redis.command);
 
 // Start server
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Planetscale Local listening at http://0.0.0.0:${PORT}`);
+  console.log(`Upstash Redis Local listening at http://0.0.0.0:${PORT}`);
 });
